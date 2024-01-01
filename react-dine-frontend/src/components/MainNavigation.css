@@ -1,0 +1,31 @@
+.navigation__header {
+    height: 60px;
+    max-width: 60rem;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .list {
+    display: flex;
+    gap: 2rem;
+  }
+  
+  .list a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    transition: color 0.2s;
+    font: Verdana;
+  }
+  
+  .list a:hover,
+  .list a.active {
+    text-decoration: underline;
+    color: white;
+  }
+  
+  ul {
+    list-style-type: none;
+  }

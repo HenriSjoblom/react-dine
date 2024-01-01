@@ -1,0 +1,55 @@
+.dish__list-item {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  margin-top: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 45%;
+  background-color: rgb(228, 233, 233);  
+}
+  
+.dish__list-item__image {
+  width: 20%;
+  max-height: 1%;
+  padding: 15px;
+}
+
+.dish__list-item__section {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  text-align: left;
+}
+
+.dish__quantity {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin: 1rem;
+}
+
+.quantity__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  border-radius: 20%;
+  padding: 2px;
+  height: 2rem;
+  width: 2rem;
+}
+
+.dish__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  border-radius: 20%;
+  height: 2rem;
+  width: 2rem;
+}
