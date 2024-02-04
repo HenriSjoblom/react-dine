@@ -1,0 +1,33 @@
+GET http://localhost:5000/health
+
+###
+GET http://localhost:5000/api/dines
+
+###
+GET http://localhost:5000/api/dines/1
+
+###
+POST http://localhost:5000/api/dines
+
+Content-Type: application/json
+
+{
+  "name": "Test Dine",
+  "price": 1.99,
+  "description": "Test text"
+}
+
+###
+PUT http://localhost:5000/api/dines
+
+Content-Type: application/json
+
+{
+  "id": 3,
+  "name": "Margherita Pizza",
+  "price": 15.99,
+  "country": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust."
+}
+
+###
+DELETE http://localhost:5000/api/dines/1
