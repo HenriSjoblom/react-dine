@@ -5,7 +5,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: dine_password
-      MYSQL_DATABASE: 'dine_db'
+      MYSQL_DATABASE: 'react_diner_db'
     ports:
       - '3306:3306'
     volumes:

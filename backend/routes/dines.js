@@ -5,10 +5,14 @@ const {
 
 const router = express.Router();
 
-// Add the routes and the controller function that should handle the request
+const verifyToken = require('../middleware/verifyToken');
+
 
 router.get('/', getDines);
 router.get('/:id', getDineById);
+
+//router.use(verifyToken);
+
 router.post('/', createDine);
 router.put('/', updateDine);
 router.delete('/:id', deleteDine);

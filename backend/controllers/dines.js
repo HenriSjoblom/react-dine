@@ -31,6 +31,7 @@ const createDine = async (req, res) => {
     description: Joi.string().min(1).required()
   });
 
+
   // Validate the req.body against the schema
   // Validate returns an error object if there are validation errors
   const { error } = schema.validate(req.body);
@@ -67,6 +68,7 @@ const updateDine = async (req, res) => {
     price: req.body.price,
     description: req.body.description,
   };
+
   const response = await dines.updateDineById(dine);
   if (response) {
     res.json(dine);
@@ -85,7 +87,7 @@ const deleteDine = async (req, res) => {
     }
     const response = await dines.deleteDineById(id);
     if(response) {
-      res.status(200).send("Dine deleted");
+      res.status(200).send(`Dine ${id} deleted`);
     }
 
   } catch (err) {

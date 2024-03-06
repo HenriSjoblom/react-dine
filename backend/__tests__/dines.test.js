@@ -1,8 +1,11 @@
 const { describe, expect, test } = require('@jest/globals');
 const request = require('supertest');
 const app = require('../app');
+const pool = require('../db/pool');
+
 
 describe('GET dine by id endpoint', ()=> {
+
   test('should return 200 if found', (done) => {
     request(app)
       .get('/api/dines/1')
@@ -37,7 +40,30 @@ describe('GET dine by id endpoint', ()=> {
 
 describe('POST dine endpoint', ()=> {
 
-  const pool = require('../db/pool');
+  const loggedInUser = {
+    userId: '',
+    email: '',
+    token: ''
+  }
+
+  beforeAll(async () => {
+    pool.query('DELETE FROM users WHERE email=?', ['john.wayne@domain.com'])
+
+    const data = {
+      name: 'John Wayne',
+      email: 'john.wayne@domain.com',
+      password: 'password123'
+    }
+
+    const response = await request(app)
+      .post('/api/users/signup')
+      .set('Accept', 'application/json')
+      .send(data)
+    loggedInUser.userId = response.body.userId
+    loggedInUser.email = response.body.email
+    loggedInUser.token = response.body.token
+  })
+
   afterAll(async () => {
     const deleteQuery = `DELETE FROM dines WHERE name LIKE 'Test Dine' AND description LIKE 'Test Description';`;
     const connection = await pool.getConnection();
@@ -54,6 +80,7 @@ describe('POST dine endpoint', ()=> {
     const response = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
       .set('Content', 'application/json')
       .send(dine);
 
@@ -73,6 +100,8 @@ describe('POST dine endpoint', ()=> {
     const response = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json')
       .send(dine);
     expect(response.status).toEqual(400);
     expect(response.text).toContain('"name" is required');
@@ -86,6 +115,8 @@ describe('POST dine endpoint', ()=> {
     const response = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json')
       .send(dine);
     expect(response.status).toEqual(400);
     expect(response.text).toContain('"description" is required');
@@ -100,6 +131,8 @@ describe('POST dine endpoint', ()=> {
     const response = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json')
       .send(dine);
     expect(response.status).toEqual(400);
     expect(response.text).toContain('"name" is not allowed to be empty');
@@ -114,14 +147,41 @@ describe('POST dine endpoint', ()=> {
     const response = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json')
       .send(dine);
     expect(response.status).toEqual(400);
     expect(response.text).toContain('Dine exist');
   });
-
 });
 
+
 describe('DELETE dines endpoint', () => {
+
+  const loggedInUser = {
+    userId: '',
+    email: '',
+    token: ''
+  }
+
+  beforeAll(async () => {
+    pool.query('DELETE FROM users WHERE email=?', ['john.wayne@domain.com'])
+
+    const data = {
+      name: 'John Wayne',
+      email: 'john.wayne@domain.com',
+      password: 'password123'
+    }
+
+    const response = await request(app)
+      .post('/api/users/signup')
+      .set('Accept', 'application/json')
+      .send(data)
+    loggedInUser.userId = response.body.userId
+    loggedInUser.email = response.body.email
+    loggedInUser.token = response.body.token
+  })
+
   test('should delete the dine by id', async () => {
     const dine = {
       name: 'Test Dine Delete',
@@ -131,22 +191,27 @@ describe('DELETE dines endpoint', () => {
     const postResponse = await request(app)
       .post('/api/dines')
       .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
       .set('Content', 'application/json')
       .send(dine);
     const postId = postResponse.body.id;
 
-    console.log('postResponse : ', postResponse.body);
     const response = await request(app)
       .delete(`/api/dines/${postId}`)
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json');
+
     expect(response.status).toEqual(200);
-    expect(response.text).toEqual('Dine deleted');
+    expect(response.text).toEqual(`Dine ${postId} deleted`);
   });
 
   test('should check that dine with id exists', async () => {
     const response = await request(app)
       .delete('/api/dines/100001')
-      .set('Accept', 'application/json');
+      .set('Accept', 'application/json')
+      .set('Authorization', 'Bearer ' + loggedInUser.token)
+      .set('Content', 'application/json');
 
     expect(response.status).toEqual(404);
     expect(response.text).toEqual('Not Found');

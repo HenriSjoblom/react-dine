@@ -34,19 +34,19 @@ const dines = {
       const connection = await pool.getConnection();
       const [results] = await connection.query(insertQuery, [dine]);
       connection.release();
-      console.log(results);
+      //console.log(results);
       return results
     } catch (error) {
       throw new Error(error);
     }
   },
   updateDineById: async (dine) => {
-    const updateQuery = 'UPDATE `dine` SET `name` = ?, `price` = ?, `description` = ?  WHERE `id` = ?';
+    const updateQuery = 'UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?  WHERE `id` = ?';
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(updateQuery, [dine.name, dine.price, dine.description]);
+      const [results] = await connection.query(updateQuery, [dine.name, dine.price, dine.description, dine.id]);
       connection.release();
-      console.log(results);
+      //console.log(results);
       return results
     } catch (error) {
       throw new Error(error);
@@ -60,7 +60,7 @@ const dines = {
         deleteQuery, [id]
       );
       connection.release();
-      console.log(results);
+      //console.log(results);
       return results;
     } catch (error) {
       throw new Error(error);
@@ -75,7 +75,7 @@ const dines = {
         findQuery, [dine.name]
       );
       connection.release();
-      console.log(results);
+      //console.log(results);
       return results;
     } catch (error) {
       throw new Error(error);

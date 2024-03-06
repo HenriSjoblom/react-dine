@@ -1,33 +1,65 @@
 GET http://localhost:5000/health
 
+
 ###
 GET http://localhost:5000/api/dines
+
 
 ###
 GET http://localhost:5000/api/dines/1
 
+
 ###
 POST http://localhost:5000/api/dines
-
 Content-Type: application/json
+Authorization: BEARER {{authToken}}
 
 {
-  "name": "Test Dine",
+  "name": "Test Dine2",
   "price": 1.99,
   "description": "Test text"
 }
 
+
 ###
 PUT http://localhost:5000/api/dines
-
 Content-Type: application/json
+Authorization: BEARER {{authToken}}
 
 {
   "id": 3,
   "name": "Margherita Pizza",
   "price": 15.99,
-  "country": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust."
+  "description": "A classic pizza with fresh mozzarella, tomatoes, and basil on a thin and crispy crust."
 }
+
 
 ###
 DELETE http://localhost:5000/api/dines/1
+Authorization: BEARER {{authToken}}
+
+
+###
+POST http://localhost:5000/api/users/signup
+Content-Type: application/json
+
+{
+  "name": "John Wayne",
+  "email": "john@wayne.com",
+  "password": "john@wayne"
+}
+
+
+###
+# @name login
+POST http://localhost:5000/api/users/login
+Content-Type: application/json
+
+{
+  "email": "john@wayne.com",
+  "password": "john@wayne"
+}
+
+
+###
+@authToken = {{login.response.body.token}}
