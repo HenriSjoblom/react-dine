@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS `dines` (
     `name` varchar(60) NOT NULL,
     `price` float(11) NOT NULL,
     `description` varchar(180) NOT NULL,
+    `image` varchar(200),
     `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (`id`)
