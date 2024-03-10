@@ -1,0 +1,38 @@
+/* This will style the form */
+.Form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 5rem;
+}
+  
+.Field {
+  flex: 0 0 calc(50% - 1rem);
+  margin: 1rem;
+  background-color: green;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ErrorMessage {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem;
+  color: black;
+  border: none;
+  border-radius: 15%;
+  cursor: pointer;
+  background-color: rgb(228, 233, 233);
+}
+
+button[type="submit"]:hover {
+  background-color: #bfc0c2;
+}

@@ -41,10 +41,10 @@ const dines = {
     }
   },
   updateDineById: async (dine) => {
-    const updateQuery = 'UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?  WHERE `id` = ?';
+    const updateQuery = 'UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?, `image` = ?  WHERE `id` = ?';
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(updateQuery, [dine.name, dine.price, dine.description, dine.id]);
+      const [results] = await connection.query(updateQuery, [dine.name, dine.price, dine.description, dine.image, dine.id]);
       connection.release();
       //console.log(results);
       return results

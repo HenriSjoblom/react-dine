@@ -64,5 +64,5 @@ Content-Type: application/json
 ###
 @authToken = {{login.response.body.token}}
 
-#@server = {{server}}
-@server = http://172.16.6.90:5000
+@server = http://localhost:5000
+#@server = http://172.16.6.90:5000

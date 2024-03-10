@@ -28,7 +28,8 @@ const createDine = async (req, res) => {
   const schema = Joi.object({
     name: Joi.string().min(1).required(),
     price: Joi.number().required(),
-    description: Joi.string().min(1).required()
+    description: Joi.string().min(1).required(),
+    image: Joi.string().min(1)
   });
 
 
@@ -67,6 +68,7 @@ const updateDine = async (req, res) => {
     name: req.body.name,
     price: req.body.price,
     description: req.body.description,
+    image: Joi.string().min(1),
   };
 
   const response = await dines.updateDineById(dine);
