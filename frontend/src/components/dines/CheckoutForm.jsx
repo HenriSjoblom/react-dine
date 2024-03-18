@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { reset } from '../utilities/dishesSlice';
+import { reset } from '../../utilities/dishesSlice';
 
 import './CheckoutForm.css';
 

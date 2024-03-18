@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { increaseQuantity, decreaseQuantity } from '../utilities/dishesSlice';
+import { increaseQuantity, decreaseQuantity } from '../../utilities/dishesSlice';
 
 import './DishItem.css';
 
@@ -8,7 +8,7 @@ const DishItem = ({id, name, price, description, image}) => {
 
   const dispatch = useDispatch();
   const quantity = useSelector(state => state.dishes[id] || 0);
-  
+
   const handleIncrease = () => {
     dispatch(increaseQuantity(id));
   };

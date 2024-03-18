@@ -1,5 +1,5 @@
-import Avatar from '../Avatar'
-import Card from '../Card'
+import Avatar from '../shared/Avatar'
+import Card from '../shared/Card'
 
 import './UserItem.css';
 

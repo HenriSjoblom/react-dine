@@ -1,5 +1,5 @@
-import CheckoutForm from "../components/CheckoutForm";
-import DishList from "../components/DishList";
+import CheckoutForm from "../components/dines/CheckoutForm";
+import DishList from "../components/dines/DishList";
 
 import './PageStyles.css'
 
@@ -7,7 +7,7 @@ import './PageStyles.css'
 const Checkout = () => {
 
   return (
-    <div className="page__background">    
+    <div className="page__background">
       <h1 className="page__header">Checkout</h1>
       <DishList quantityLimit={1}/>
       <CheckoutForm />
