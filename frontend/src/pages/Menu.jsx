@@ -1,5 +1,5 @@
-import DishList from "../components/DishList"
-import OrderCartButton from "../components/OrderCartButton";
+import DishList from "../components/dines/DishList"
+import OrderCartButton from "../components/dines/OrderCartButton";
 
 import './PageStyles.css'
 
@@ -7,7 +7,7 @@ import './PageStyles.css'
 const Menu = () => {
 
   return(
-    <div className="page__background">    
+    <div className="page__background">
       <h1 className="page__header">Menu</h1>
       <OrderCartButton />
       <DishList />

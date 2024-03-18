@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import './Button.css'
+import '../shared/Button.css'
 
 
 const CheckoutButton = () => {

@@ -1,4 +1,4 @@
-import UsersList from "../components/Users/UserList";
+import UsersList from "../components/users/UserList";
 
 const DUMMY_USERS = [
   {

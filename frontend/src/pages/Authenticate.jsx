@@ -1,15 +1,19 @@
-import { useRef, useState} from "react"
+import { useRef, useState, useContext} from "react"
 import { useMutation } from "react-query";
+import { useNavigate } from 'react-router-dom';
 
-import Card from "../components/Card";
-import Input from "../components/Input";
-import Button from "../components/Button";
+import { AuthContext } from '../context/auth-context';
+import Card from "../components/shared/Card";
+import Input from "../components/shared/Input";
+import Button from "../components/shared/Button";
 import { signUpUser, loginUser } from "../api/users";
 
 import './Authenticate.css';
 
 const Authenticate = props => {
+    let navigate = useNavigate();
 
+    const auth = useContext(AuthContext);
     const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
@@ -26,12 +30,13 @@ const Authenticate = props => {
         // Will execute only once, for the last mutation,
         // regardless which mutation resolves first
             console.log(data);
+            auth.login(data.id, data.token);
         },
         onError: (error) => {
         // An error happened!
             console.log(error);
         }
-    });
+    }, []);
 
     const loginUserMutation = useMutation({
         mutationFn: loginUser,
@@ -39,32 +44,36 @@ const Authenticate = props => {
           // Will execute only once, for the last mutation,
           // regardless which mutation resolves first
           console.log(data);
+          auth.login(data.id, data.token);
         },
         onError: (error) => {
           // An error happened!
           console.log(error);
         }
-    });
+    }, []);
+
+
 
     const onSubmitHandler = event => {
-
         event.preventDefault();
         if (isLoginMode) {
-        loginUserMutation.mutate({
-            email: emailRef.current.value,
-            password: passwordRef.current.value
-        })
+            loginUserMutation.mutate({
+                email: emailRef.current.value,
+                password: passwordRef.current.value
+            })
+           // navigate('/');
         } else {
-        signUpUserMutation.mutate({
-            name: nameRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value
-        })
+            signUpUserMutation.mutate({
+                name: nameRef.current.value,
+                email: emailRef.current.value,
+                password: passwordRef.current.value
+            })
+          //  navigate('/');
         }
     }
 
-
     return(
+
     <Card className="authentication">
         {!isLoginMode? <h2>Sign Up</h2> : <h2>Login</h2>}
         <form onSubmit={onSubmitHandler}>
@@ -74,10 +83,10 @@ const Authenticate = props => {
             <Input id="email" ref={emailRef} type="text" label="Email" />
             <Input id="password" ref={passwordRef} type="password" label="Password" />
             <Button type="submit" disable={signUpUserMutation.isLoading}>
-                {isLoginMode? 'LOGIN' : 'SIGNUP'}
+                {isLoginMode? 'Login' : 'Sign Up'}
             </Button>
             <Button inverse onClick={switchModeHanlder}>
-                {isLoginMode? 'SignUp' : 'Login'} instead?
+                {isLoginMode? 'Sign Up' : 'Login'} instead?
             </Button>
         </form>
     </Card>
