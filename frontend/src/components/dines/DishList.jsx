@@ -20,7 +20,7 @@ const DishList = ({ quantityLimit=0 }) => {
       setError(null)
       setIsLoading(true);
 
-      const response = await fetch('http://localhost:5000/api/dines');
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dines`);
       if(!response.ok) {
         throw new Error('Something went wrong!');
       }
