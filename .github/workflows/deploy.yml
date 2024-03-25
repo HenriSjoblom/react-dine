@@ -51,7 +51,7 @@ jobs:
           tags: "${{ env.REGISTRY }}/${{ env.BACKEND_IMAGE_NAME }}"
 
       - name: Create production .env from secret
-        run: echo "${{ secrets.ENV_FILE_PROD }}" > ./fronend/.env
+        run: echo "${{ secrets.ENV_FILE_PROD }}" > ./frontend/.env
 
       - name: Build and Push the Frontend Image
         uses: docker/build-push-action@v5.0.0
