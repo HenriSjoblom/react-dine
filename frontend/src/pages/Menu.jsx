@@ -1,18 +1,28 @@
 import DishList from "../components/dines/DishList"
-import OrderCartButton from "../components/dines/OrderCartButton";
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/shared/Button';
 
 import './PageStyles.css'
 
 
 const Menu = () => {
 
+  const navigate = useNavigate();
+
+  const navigateCartHandler = () => {
+    navigate('/ordercart');
+  }
   return(
-    <div className="page__background">
+    <>
       <h1 className="page__header">Menu</h1>
-      <OrderCartButton />
+      <div className="button-container">
+        <Button onClick={navigateCartHandler}>Order Cart</Button>
+      </div>
       <DishList />
-      <OrderCartButton />
-    </div>
+      <div className="button-container">
+        <Button onClick={navigateCartHandler}>Order Cart</Button>
+      </div>
+    </>
   )
 };
 

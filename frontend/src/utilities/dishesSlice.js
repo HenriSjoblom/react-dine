@@ -10,8 +10,10 @@ const dishesSlice = createSlice({
     },
     decreaseQuantity: (state, action) => {
       const id = action.payload;
-      if (state[id] > 0) {
+      if (state[id] > 1) {
         state[id] -= 1;
+      } else {
+        delete state[id];
       }
     },
     reset: () => {},

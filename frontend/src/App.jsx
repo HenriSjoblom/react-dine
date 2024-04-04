@@ -1,8 +1,3 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux'
-import {QueryClient, QueryClientProvider} from 'react-query'
-import { useCallback, useEffect, useState } from 'react';
-
 import store from'./utilities/store';
 import Home from './pages/Home';
 import Menu from './pages/Menu';
@@ -13,7 +8,12 @@ import OrderCart from './pages/OrderCart';
 import Authenticate from './pages/Authenticate';
 import Users from './pages/Users';
 import AddDine from './pages/AddDine';
+
 import { AuthContext } from './context/auth-context';
+import { Provider, useSelector } from 'react-redux';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import {QueryClient, QueryClientProvider} from 'react-query'
+import { useCallback, useEffect, useState } from 'react';
 
 import './App.css'
 
@@ -36,8 +36,6 @@ const router = createBrowserRouter([
   }
 ]);
 
-//
-//
 function App() {
 
   const [token, setToken] = useState(false);

@@ -1,9 +1,9 @@
 .button {
   font: inherit;
   padding: 0.5rem 1.5rem;
-  border: 1px solid #4285F4;
+  border: 1px solid darkblue;
   border-radius: 4px;
-  background: #4285F4;
+  background: darkblue;
   color: white;
   cursor: pointer;
   margin-right: 1rem;
@@ -20,12 +20,12 @@
 }
 .button--inverse {
   background: transparent;
-  color: #4285F4;
+  color: darkblue;
 }
 .button--inverse:hover,
 .button--inverse:active {
   color: white;
-  background: #4285F4;
+  background: darkblue;
 }
 .button--danger {
   background: #ff4444;
@@ -49,18 +49,4 @@
 }
 .button--big {
   font-size: 1.5rem;
-}
-
-.direction__button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 17px 70px;
-  border-radius: 15%;
-  height: 2rem;
-  width: 2rem;
-  color: rgb(0, 0, 0);
-  background-color: rgb(228, 233, 233);
-  white-space: nowrap;
-  margin: 2rem;
 }
