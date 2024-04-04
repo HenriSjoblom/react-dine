@@ -1,22 +1,43 @@
 import DishList from "../components/dines/DishList"
-import CheckoutButton from "../components/dines/CheckoutButton"
-import MenuButton from "../components/dines/MenuButton"
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/shared/Button';
+
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
 
 const OrderCart = () => {
 
+  const [isEmpty, setIsEmpty] = useState(false);
+  const navigate = useNavigate();
+
+  const navigateMenuHandler = () => {
+    navigate('/menu');
+  }
+
+  const navigateCheckoutHandler = () => {
+    navigate('/checkout');
+  }
+
+  const dishes = useSelector(state => state.dishes);
+
+  useEffect(() => {
+    setIsEmpty(Object.keys(dishes).length === 0);
+  }, [dishes]);
+
+
   return(
-    <div className="page__background">
+    <>
       <h1 className="page__header">Order Cart</h1>
-        <div className="direction__button__container">
-          <MenuButton text={'Back To Menu'} />
-          <CheckoutButton />
-        </div>
-        <DishList quantityLimit={1}/>
-        <div className="direction__button__container">
-          <MenuButton text={'Back To Menu'} />
-          <CheckoutButton />
+      <div className="direction-button-container">
+        <Button onClick={navigateMenuHandler}>Back To Menu</Button>
+        <Button onClick={navigateCheckoutHandler} disabled={isEmpty}>Checkout</Button>
       </div>
-    </div>
+      <DishList quantityLimit={1}/>
+      <div className="direction-button-container">
+        <Button onClick={navigateMenuHandler}>Back To Menu</Button>
+        <Button onClick={navigateCheckoutHandler} disabled={isEmpty}>Checkout</Button>
+      </div>
+    </>
   )
 };
 

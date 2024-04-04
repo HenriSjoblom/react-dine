@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { reset } from '../../utilities/dishesSlice';
 
+import Button from '../shared/Button';
+
 import './CheckoutForm.css';
 
 
@@ -129,48 +131,52 @@ const CheckoutForm = () => {
   };
 
   return (
-    <div>
-      <Formik
-        initialValues={{ name: '', email: '',street: '', city: '', postalCode: '', phoneNumber: '', specialInstructions: '' }}
-        validationSchema={validationSchema}
-        validateOnBlur={false}
-        validateOnChange={false}
-        onSubmit={submitOrder}>
+    <>
+      <div className='form-container'>
+        <Formik
+          initialValues={{ name: '', email: '',street: '', city: '', postalCode: '', phoneNumber: '', specialInstructions: '' }}
+          validationSchema={validationSchema}
+          validateOnBlur={false}
+          validateOnChange={false}
+          onSubmit={submitOrder}>
 
-        <Form>
-          <label htmlFor="name">Name</label>
-          <Field name="name" type="text" />
-          <ErrorMessage name="name" component="div" />
+          <Form className="form">
+            <label htmlFor="name">Name</label>
+            <Field name="name" type="text" className="field" />
+            <ErrorMessage name="name" component="div" className="error-message" />
 
-          <label htmlFor="email">Email</label>
-          <Field name="email" type="text" />
-          <ErrorMessage name="email" component="div" />
+            <label htmlFor="email">Email</label>
+            <Field name="email" type="text" className="field" />
+            <ErrorMessage name="email" component="div" className="error-message" />
 
-          <label htmlFor="street">Street</label>
-          <Field name="street" type="text" />
-          <ErrorMessage name="street" component="div" />
+            <label htmlFor="street">Street</label>
+            <Field name="street" type="text" className="field" />
+            <ErrorMessage name="street" component="div" className="error-message" />
 
-          <label htmlFor="city">City</label>
-          <Field name="city" type="text" />
-          <ErrorMessage name="city" component="div" />
+            <label htmlFor="city">City</label>
+            <Field name="city" type="text" className="field" />
+            <ErrorMessage name="city" component="div" className="error-message" />
 
-          <label htmlFor="postalCode">Postal Code</label>
-          <Field name="postalCode" type="text" />
-          <ErrorMessage name="postalCode" component="div" />
+            <label htmlFor="postalCode">Postal Code</label>
+            <Field name="postalCode" type="text" className="field" />
+            <ErrorMessage name="postalCode" component="div" className="error-message" />
 
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <Field name="phoneNumber" type="text" />
-          <ErrorMessage name="phoneNumber" component="div" />
+            <label htmlFor="phoneNumber">Phone Number</label>
+            <Field name="phoneNumber" type="text" className="field" />
+            <ErrorMessage name="phoneNumber" component="div" className="error-message" />
 
-          <label htmlFor="specialInstructions">Special Instructions</label>
-          <Field name="specialInstructions" type="text" />
-          <ErrorMessage name="specialInstructions" component="div" />
+            <label htmlFor="specialInstructions">Special Instructions</label>
+            <Field name="specialInstructions" type="text" className="instructions" />
+            <ErrorMessage name="specialInstructions" component="div" className="error-message" />
 
-          <button type="submit">Submit order</button>
-        </Form>
-      </Formik>
+            <div className='button-container'>
+              <Button type="submit">Submit Order</Button>
+            </div>
+          </Form>
+        </Formik>
+      </div>
       <ToastContainer />
-    </div>
+    </>
   );
 };
 

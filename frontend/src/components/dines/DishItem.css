@@ -4,17 +4,17 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  margin-top: 20px;
+  margin: 10px;
   border: 1px solid black;
   border-radius: 10px;
-  width: 45%;
-  background-color: rgb(228, 233, 233);  
+  width: 75%;
+  background-color: rgb(228, 233, 233);
 }
-  
+
 .dish__list-item__image {
-  width: 20%;
-  max-height: 1%;
+  width: 33%;
   padding: 15px;
+  border-radius: 4px;
 }
 
 .dish__list-item__section {

@@ -4,7 +4,7 @@ import { increaseQuantity, decreaseQuantity } from '../../utilities/dishesSlice'
 import './DishItem.css';
 
 
-const DishItem = ({id, name, price, description, image}) => {
+const DishItem = ({id, name, price, description, image, allowChange=true }) => {
 
   const dispatch = useDispatch();
   const quantity = useSelector(state => state.dishes[id] || 0);
@@ -25,9 +25,9 @@ const DishItem = ({id, name, price, description, image}) => {
         <p>{description}</p>
         <h4> Price:  {price}$</h4>
         <div className='dish__quantity'>
-          {quantity > 0 && <button className='dish__button' onClick={handleDecrease}>-</button>}
+          {allowChange && quantity > 0 && <button className='dish__button' onClick={handleDecrease}>-</button>}
           <span className='quantity__box'> {quantity} </span>
-          <button className='dish__button' onClick={handleIncrease}>+</button>
+          {allowChange && <button className='dish__button' onClick={handleIncrease}>+</button>}
         </div>
       </section>
     </li>

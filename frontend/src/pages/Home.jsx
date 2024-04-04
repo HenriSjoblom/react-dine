@@ -1,15 +1,23 @@
-import MenuButton from '../components/dines/MenuButton';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/shared/Button';
+
 import './PageStyles.css'
 
 
 const Home = () => {
 
+  const navigate = useNavigate();
+
+  const navigateHandler = () => {
+    navigate('/menu');
+  }
+
   return (
-    <div className="page__background">
+    <>
       <h1 className='page__header'>ReactDine</h1>
       <p className='page__text'>ReactDine - Your Digital Gateway to React Diner's Kitchen</p>
-      <MenuButton />
-    </div>
+      <Button onClick={navigateHandler}>Go To Menu</Button>
+    </>
   )
 };
 
