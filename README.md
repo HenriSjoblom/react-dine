@@ -22,7 +22,7 @@ React Dine is a school project developed to learn and demonstrate skills in mode
 - Docker
 - Jest
 
-## Running
+# Running
 
 You need three console windows. One for frontend, one for backend and one for the Docker MySQL database.
 
