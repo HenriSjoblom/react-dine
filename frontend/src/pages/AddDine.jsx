@@ -10,7 +10,6 @@ import { AuthContext } from '../context/auth-context';
 import './PageStyles.css';
 
 
-
 const AddDine = () => {
   const navigate = useNavigate();
 

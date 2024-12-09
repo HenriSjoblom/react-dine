@@ -1,5 +1,5 @@
 export const addDine = async ({name, price, description, image}) => {
-    console.log(name, price, description, image);
+  
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/dines`,
       {

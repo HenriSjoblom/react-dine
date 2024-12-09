@@ -31,7 +31,6 @@ const Authenticate = () => {
       onSuccess: (data) => {
         // Will execute only once, for the last mutation,
         // regardless which mutation resolves first
-        console.log(data);
         auth.login(data.id, data.token);
         navigate("/");
       },
@@ -48,7 +47,6 @@ const Authenticate = () => {
       onSuccess: (data) => {
         // Will execute only once, for the last mutation,
         // regardless which mutation resolves first
-        console.log(data);
         auth.login(data.id, data.token);
         navigate("/");
       },
@@ -66,14 +64,12 @@ const Authenticate = () => {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
-
     } else {
       signUpUserMutation.mutate({
         name: nameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
-
     }
   };
 

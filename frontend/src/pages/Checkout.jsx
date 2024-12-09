@@ -1,14 +1,16 @@
 import CheckoutForm from "../components/dines/CheckoutForm";
 import DishList from "../components/dines/DishList";
-import Button from '../components/shared/Button';
+import Button from "../components/shared/Button";
+import { useNavigate } from "react-router-dom";
 
-import './PageStyles.css'
-
-const navigateCartHandler = () => {
-  navigate('/checkout');
-}
+import "./PageStyles.css";
 
 const Checkout = () => {
+  let navigate = useNavigate();
+
+  const navigateCartHandler = () => {
+    navigate("/checkout");
+  };
 
   return (
     <>
@@ -18,7 +20,7 @@ const Checkout = () => {
       </div>
       <CheckoutForm />
       <h1 className="page__header">Order</h1>
-      <DishList quantityLimit={1} allowChange={false}/>
+      <DishList quantityLimit={1} allowChange={false} />
     </>
   );
 };

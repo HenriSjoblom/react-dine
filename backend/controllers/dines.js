@@ -69,7 +69,6 @@ const updateDine = async (req, res) => {
     description: req.body.description,
     image: Joi.string().min(1),
   };
-  console.log("updateDine controller", dine);
   const response = await dines.updateDineById(dine);
   if (response) {
     res.json(dine);
@@ -90,7 +89,6 @@ const deleteDine = async (req, res) => {
       res.status(200).send(`Dine ${id} deleted`);
     }
   } catch (err) {
-    console.log(err);
     res.status(500).send("Something went wrong");
   }
 };

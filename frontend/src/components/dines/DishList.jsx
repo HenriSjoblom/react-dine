@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
-import { useState, useCallback, useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { useState, useCallback, useEffect } from "react";
 
-import DishItem from './DishItem';
-import './DishList.css'
+import DishItem from "./DishItem";
+import "./DishList.css";
 
 /*
   This component fetches dish data from the API.
@@ -10,27 +10,25 @@ import './DishList.css'
   - QuantityLimit: This parameter sets a limit to filter out dishes with a quantity less than the specified limit.
   - Usage: This component is used in the menu, order cart, and checkout pages of the application.
 */
-const DishList = ({ quantityLimit=0, allowChange=true }) => {
-
+const DishList = ({ quantityLimit = 0, allowChange = true }) => {
   const [dishes, setDishes] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const fetchDishes = useCallback( async() => {
+  const fetchDishes = useCallback(async () => {
     try {
-      setError(null)
+      setError(null);
       setIsLoading(true);
 
       const response = await fetch(`${import.meta.env.VITE_API_URL}/api/dines`);
-      if(!response.ok) {
-        throw new Error('Something went wrong!');
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
       }
       const data = await response.json();
-      console.log(data);
       setDishes(data);
     } catch (error) {
       setError(error.message);
-      console.error('Error: ', error);
+      console.error("Error: ", error);
     }
     setIsLoading(false);
   }, []);
@@ -39,7 +37,7 @@ const DishList = ({ quantityLimit=0, allowChange=true }) => {
     fetchDishes();
   }, [fetchDishes]);
 
-  const quantities = useSelector(state => state.dishes);
+  const quantities = useSelector((state) => state.dishes);
 
   let content = <p>No dishes data found</p>;
   if (error) {
@@ -50,20 +48,42 @@ const DishList = ({ quantityLimit=0, allowChange=true }) => {
   }
   if (dishes != null) {
     if (quantityLimit == 0) {
-      content = dishes?.map(d => <DishItem key={d.id} id={d.id} name={d.name} price={d.price} description={d.description} image={d.image}/>)
+      content = dishes?.map((d) => (
+        <DishItem
+          key={d.id}
+          id={d.id}
+          name={d.name}
+          price={d.price}
+          description={d.description}
+          image={d.image}
+        />
+      ));
+    } else {
+      content = dishes
+        ?.filter((d) => quantities[d.id] >= quantityLimit)
+        .map((d) => (
+          <DishItem
+            key={d.id}
+            id={d.id}
+            name={d.name}
+            price={d.price}
+            description={d.description}
+            image={d.image}
+            allowChange={allowChange}
+          />
+        ));
     }
-    else  {
-      content= dishes?.filter(d => quantities[d.id] >= quantityLimit).map(d =>
-                <DishItem key={d.id} id={d.id} name={d.name} price={d.price} description={d.description} image={d.image}  allowChange={allowChange}/>)}
-      if ( content.length === 0 ) {
-        content = <p>Your cart is waiting for you to fill it. Discover our variety of dishes and make your selection!</p>
-      }
+    if (content.length === 0) {
+      content = (
+        <p>
+          Your cart is waiting for you to fill it. Discover our variety of
+          dishes and make your selection!
+        </p>
+      );
     }
-    //<div className='dish-container'>
-  return (<div className='dish-container'>
-            {content}
-          </div>
-  )
+  }
+  //<div className='dish-container'>
+  return <div className="dish-container">{content}</div>;
 };
 
 export default DishList;

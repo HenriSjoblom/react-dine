@@ -36,7 +36,6 @@ const dines = {
     }
   },
   updateDineById: async (dine) => {
-    console.log("updateDineById", dine);
     const updateQuery =
       "UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?  WHERE `id` = ?";
     try {
@@ -60,7 +59,6 @@ const dines = {
       const connection = await pool.getConnection();
       const [results] = await connection.query(deleteQuery, [id]);
       connection.release();
-      //console.log(results);
       return results;
     } catch (error) {
       throw new Error(error);
@@ -73,7 +71,6 @@ const dines = {
       const connection = await pool.getConnection();
       const [results] = await connection.query(findQuery, [dine.name]);
       connection.release();
-      //console.log(results);
       return results;
     } catch (error) {
       throw new Error(error);

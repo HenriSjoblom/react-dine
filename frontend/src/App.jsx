@@ -10,7 +10,7 @@ import Users from './pages/Users';
 import AddDine from './pages/AddDine';
 
 import { AuthContext } from './context/auth-context';
-import { Provider, useSelector } from 'react-redux';
+import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import {QueryClient, QueryClientProvider} from 'react-query'
 import { useCallback, useEffect, useState } from 'react';
