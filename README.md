@@ -1,8 +1,8 @@
-# React Dine 📅 
+# React Dine
 
 React Dine is a school project developed to learn and demonstrate skills in modern web techonologies.
 
-# Technologies 🛠️
+# Technologies
 
 ## Frontend
 
