@@ -12,6 +12,7 @@ const users = {
       connection.release();
       return results;
     } catch (error) {
+      console.log('Error in user create:', error);
       throw new Error(error);
     }
   },

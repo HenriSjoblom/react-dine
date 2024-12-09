@@ -15,7 +15,7 @@ Content-Type: application/json
 Authorization: BEARER {{authToken}}
 
 {
-  "name": "Test Dine2",
+  "name": "Test Dine3",
   "price": 1.99,
   "description": "Test text"
 }

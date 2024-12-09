@@ -5,7 +5,7 @@ const verifyToken = (req, res, next) => {
   if (req.method === 'OPTIONS') {
     return next()
   }
-  // we will use the headers for our token
+  // Check if the request has an authorization header
   try {
     const token = req.headers.authorization.split(' ')[1] // Convention is 'Bearer TOKEN'
     if (!token) {

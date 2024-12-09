@@ -11,7 +11,7 @@ const verifyToken = require('../middleware/verifyToken');
 router.get('/', getDines);
 router.get('/:id', getDineById);
 
-//router.use(verifyToken);
+router.use(verifyToken);
 
 router.post('/', createDine);
 router.put('/', updateDine);

@@ -1,8 +1,9 @@
-const Joi = require('joi');
-const dines = require('../models/dines');
+const Joi = require("joi");
+const dines = require("../models/dines");
 
 const getDines = async (req, res) => {
   const response = await dines.findDines();
+
   if (response) {
     res.json(response);
   }
@@ -16,7 +17,7 @@ const getDineById = async (req, res) => {
     if (response) {
       res.send(response);
     } else {
-      res.status(404).send('Not Found');
+      res.status(404).send("Not Found");
     }
   } catch (err) {
     res.status(500).send("Something went wrong");
@@ -24,14 +25,12 @@ const getDineById = async (req, res) => {
 };
 
 const createDine = async (req, res) => {
-
   const schema = Joi.object({
     name: Joi.string().min(1).required(),
     price: Joi.number().required(),
     description: Joi.string().min(1).required(),
-    image: Joi.string().min(1)
+    image: Joi.string().min(1),
   });
-
 
   // Validate the req.body against the schema
   // Validate returns an error object if there are validation errors
@@ -50,7 +49,7 @@ const createDine = async (req, res) => {
 
   const result = await dines.findByDine(dine);
   if (result.length > 0) {
-    res.status(400).send('Dine exist');
+    res.status(400).send("Dine exist");
     return;
   }
 
@@ -70,7 +69,7 @@ const updateDine = async (req, res) => {
     description: req.body.description,
     image: Joi.string().min(1),
   };
-
+  console.log("updateDine controller", dine);
   const response = await dines.updateDineById(dine);
   if (response) {
     res.json(dine);
@@ -78,20 +77,18 @@ const updateDine = async (req, res) => {
 };
 
 const deleteDine = async (req, res) => {
-
   const id = parseInt(req.params.id, 10);
 
   try {
     const result = await dines.findDineById(id);
-    if ( ! result ) {
-      res.status(404).send('Not Found');
+    if (!result) {
+      res.status(404).send("Not Found");
       return;
     }
     const response = await dines.deleteDineById(id);
-    if(response) {
+    if (response) {
       res.status(200).send(`Dine ${id} deleted`);
     }
-
   } catch (err) {
     console.log(err);
     res.status(500).send("Something went wrong");
@@ -104,5 +101,5 @@ module.exports = {
   deleteDine,
   getDines,
   getDineById,
-  updateDine
+  updateDine,
 };

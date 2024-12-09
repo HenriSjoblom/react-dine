@@ -1,12 +1,10 @@
-const pool = require('../db/pool');
+const pool = require("../db/pool");
 
 const dines = {
-  findDines: async() => {
+  findDines: async () => {
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(
-        'SELECT * FROM `dines`'
-      );
+      const [results] = await connection.query("SELECT * FROM `dines`");
       connection.release();
       return results;
     } catch (error) {
@@ -14,13 +12,11 @@ const dines = {
     }
   },
   findDineById: async (id) => {
-    const selectQuery = 'SELECT * FROM dines WHERE id=?;';
+    const selectQuery = "SELECT * FROM dines WHERE id=?;";
 
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(
-        selectQuery, [id]
-      );
+      const [results] = await connection.query(selectQuery, [id]);
       connection.release();
       return results[0];
     } catch (error) {
@@ -28,37 +24,41 @@ const dines = {
     }
   },
   createNewDine: async (dine) => {
-
-    const insertQuery = 'INSERT INTO `dines` SET ?';
+    const insertQuery = "INSERT INTO `dines` SET ?";
     try {
       const connection = await pool.getConnection();
       const [results] = await connection.query(insertQuery, [dine]);
       connection.release();
-      //console.log(results);
-      return results
+
+      return results;
     } catch (error) {
       throw new Error(error);
     }
   },
   updateDineById: async (dine) => {
-    const updateQuery = 'UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?, `image` = ?  WHERE `id` = ?';
+    console.log("updateDineById", dine);
+    const updateQuery =
+      "UPDATE `dines` SET `name` = ?, `price` = ?, `description` = ?  WHERE `id` = ?";
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(updateQuery, [dine.name, dine.price, dine.description, dine.image, dine.id]);
+      const [results] = await connection.query(updateQuery, [
+        dine.name,
+        dine.price,
+        dine.description,
+        dine.id,
+      ]);
       connection.release();
-      //console.log(results);
-      return results
+
+      return results;
     } catch (error) {
       throw new Error(error);
     }
   },
   deleteDineById: async (id) => {
-    const deleteQuery = 'DELETE FROM `dines` WHERE `id` = ?';
+    const deleteQuery = "DELETE FROM `dines` WHERE `id` = ?";
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(
-        deleteQuery, [id]
-      );
+      const [results] = await connection.query(deleteQuery, [id]);
       connection.release();
       //console.log(results);
       return results;
@@ -67,13 +67,11 @@ const dines = {
     }
   },
 
-  findByDine: async(dine) => {
-    const findQuery = 'SELECT * FROM `dines` WHERE name=?'
+  findByDine: async (dine) => {
+    const findQuery = "SELECT * FROM `dines` WHERE name=?";
     try {
       const connection = await pool.getConnection();
-      const [results] = await connection.query(
-        findQuery, [dine.name]
-      );
+      const [results] = await connection.query(findQuery, [dine.name]);
       connection.release();
       //console.log(results);
       return results;
@@ -81,5 +79,5 @@ const dines = {
       throw new Error(error);
     }
   },
-}
+};
 module.exports = dines;

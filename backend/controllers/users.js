@@ -9,6 +9,8 @@ const users = require('../models/users');
 
 const signUpUser = async (req, res) => {
 
+  console.log('Signup request received:', req.body);
+
   const schema = Joi.object({
     name: Joi.string().min(1).required(),
     email: Joi.string().min(1).required(),
@@ -54,6 +56,7 @@ const signUpUser = async (req, res) => {
     const result = await users.create(newUser);
 
     if (!result) {
+      console.log('Error creating user', result);
       res.status(500).send('Something went wrong creating the user');
       return ;
     }
@@ -66,12 +69,14 @@ const signUpUser = async (req, res) => {
       { expiresIn: '1h' }
     );
 
+    console.log('User created successfully:', newUser);
     res.status(201).json({
       id: newUser.id,
       email: newUser.email,
       token: token
     })
   } catch (err) {
+    console.log("Error creating user", err);
     res.status(500).send('Signup failed, please try again');
     return ;
   }
